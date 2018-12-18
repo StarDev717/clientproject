@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{data.firstName}} {{data.lastName}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="regularForm" (ngSubmit)="onReactiveFormSubmit()" novalidate>
+    <div class="form-group">
+      <label for="email">First Name</label>
+      <input type="text" class="form-control" id="firstName" [value]="data.firstName" (keyup)="updateInput($event, 'firstName')" formControlName="firstName" required>
+      <small class="form-text text-muted danger" *ngIf="!regularForm.get('firstName').valid && (regularForm.get('firstName').dirty || regularForm.get('firstName').touched)" >Please enter a valid first name!</small>
+    </div>
+    <div class="form-group">
+      <label for="email">Last Name</label>
+      <input type="text" class="form-control" id="lastName" [value]="data.lastName" formControlName="lastName" required>
+      <small class="form-text text-muted danger" *ngIf="!regularForm.get('lastName').valid && (regularForm.get('lastName').dirty || regularForm.get('lastName').touched)">Please enter a valid last name!</small>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" [value]="data.email" id="email" formControlName="email" required>
+      <small class="form-text text-muted danger" *ngIf="!regularForm.get('email').valid && (regularForm.get('email').dirty || regularForm.get('email').touched)">Please enter a valid email!</small>
+    </div>
+
+    <div class="form-group">
+      <button type="button" class="btn btn-danger btn-raised" (click)="activeModal.close('Close click')">Close</button>
+      <button type="submit" class="btn btn-success btn-raised pull-right" >Submit</button>
+    </div>
+  </form>
+</div>

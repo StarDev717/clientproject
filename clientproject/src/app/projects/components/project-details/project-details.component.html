@@ -1,0 +1,92 @@
+<section id="users" class="mb-3">
+  <div class="row">
+    <div class="col-12">
+      <div class="content-header">{{(project$|async).title}} Employees</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="text-center" *ngIf="employeesLoading$|async" >
+        <i class="spinner fa fa-refresh text-center" style="font-size:35px;"></i>
+      </div>
+
+      <ng2-smart-table *ngIf="employeesLoaded$|async" [settings]="settings" [source]="usersData"  (custom)="onCustom($event)">
+        <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+      </ng2-smart-table>
+    </div>
+  </div>
+</section>
+<section id="buildings" class="mb-3">
+  <div class="row">
+    <div class="col-12">
+      <div class="content-header">{{(project$|async).title}} Buildings</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="text-center" *ngIf="buildingsLoading$|async" >
+        <i class="spinner fa fa-refresh text-center" style="font-size:35px;"></i>
+      </div>
+
+      <ng2-smart-table *ngIf="buildingsLoaded$|async" [settings]="buildingSettings" [source]="buildingsData"  (custom)="onCustom($event)">
+      </ng2-smart-table>
+    </div>
+  </div>
+</section>
+
+
+<div class="row">
+  <!--Nav orientation Starts-->
+  <div class="col-md-12 col-lg-12">
+    <div class="card" *ngFor="let report of reportsData">
+      <div class="card-header">
+        <h4 class="card-title">{{report.title}}</h4>
+      </div>
+      <div *ngIf="(reportEmployees$|async) && (reportBuildings$|async)">
+        <div class="col-12 col-md-10 col-lg-11 " style="margin-left: 20px ; margin-right: 10px" *ngIf="(reportEmployees$|async)[report.id] && (reportBuildings$|async)[report.id]">
+          <app-map [reportId]="report.id" [employees]="(reportEmployees$|async)[report.id]" [buildings]="(reportBuildings$|async)[report.id]"></app-map>
+        </div>
+      </div>
+      <div class="card-body" style="margin-top: 10px">
+        <div class="card-block" *ngIf="(reportProjections$|async)">
+          <ngb-tabset type="pills" [orientation]="'horizontal'" *ngIf="(reportProjections$|async)[report.id]">
+            <ngb-tab *ngFor="let building of (reportProjections$|async)[report.id].projections; index as i" [title]="building.buildingTitle">
+              <ng-template ngbTabContent>
+                <div class="col-md-4">
+                  <div class="position-relative has-icon-left">
+                    <input  [(ngModel)]="this['qtd' + building.id]" type="text" class="form-control" name="form-control-with-icon">
+                    <div class="form-control-position">
+                      <i class="ft-search info"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6 col-lg-4" *ngFor="let employee of building.employees| search:'firstName,lastName':this['qtd' + building.id]">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="card-block">
+                          <h4 class="card-title">{{employee.firstName}} {{employee.lastName}}</h4>
+                          <p class="category text-gray font-small-4">{{employee.address}}</p>
+                          <hr class="grey">
+                          <div class="row grey">
+                            <div class="col-6">
+                              <a><i class="fa fa-car mr-1"></i> <span>{{employee.distance| number : '1.2-2'}} mi</span></a>
+                            </div>
+                            <div class="col-6">
+                              <a><i class="ft-clock mr-1"></i> <span>{{employee.duration}} min</span></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Nav orientation Ends-->
+</div>

@@ -1,0 +1,50 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{data.firstName}} {{data.lastName}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="regularForm" (ngSubmit)="onReactiveFormSubmit()" novalidate>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" [value]="data.firstName" formControlName="firstName" required>
+      <small class="form-text text-muted danger" *ngIf="!regularForm.get('firstName').valid && (regularForm.get('firstName').dirty || regularForm.get('firstName').touched)">Please enter a valid name!</small>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" [value]="data.lastName" formControlName="lastName" required>
+      <small class="form-text text-muted danger" *ngIf="!regularForm.get('lastName').valid && (regularForm.get('lastName').dirty || regularForm.get('lastName').touched)">Please enter a valid name!</small>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" [value]="data.email" [value]="data.email" id="email" formControlName="email" required>
+      <small class="form-text text-muted danger" *ngIf="!regularForm.get('email').valid && (regularForm.get('email').dirty || regularForm.get('email').touched)">Please enter a valid email!</small>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="text" class="form-control" id="phone" [value]="data.phone" formControlName="phone" required>
+      <small class="form-text text-muted danger" *ngIf="!regularForm.get('phone').valid && (regularForm.get('phone').dirty || regularForm.get('phone').touched)">Please enter a valid name!</small>
+    </div>
+    <div class="form-group">
+      <label for="address">Address</label>
+      <textarea class="form-control" rows="3" id="address" [value]="data.address" formControlName="address" required></textarea>
+      <small class="form-text text-muted danger" *ngIf="!regularForm.get('address').valid && (regularForm.get('address').dirty || regularForm.get('address').touched)">This field is required!</small>
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" class="form-control" id="city" [value]="data.city" formControlName="city" required>
+      <small class="form-text text-muted danger" *ngIf="!regularForm.get('city').valid && (regularForm.get('city').dirty || regularForm.get('city').touched)">Please enter a valid name!</small>
+    </div>
+    <div class="form-group">
+      <label for="zip">Zip</label>
+      <input type="text" class="form-control" id="zip" [value]="data.zip" formControlName="zip" required>
+      <small class="form-text text-muted danger" *ngIf="!regularForm.get('zip').valid && (regularForm.get('zip').dirty || regularForm.get('zip').touched)">Please enter a valid name!</small>
+    </div>
+    <div class="form-group">
+      <button type="button" class="btn btn-danger btn-raised" (click)="activeModal.close('Close click')">Close</button>
+      <button type="submit" class="btn btn-success btn-raised pull-right" >Submit</button>
+    </div>
+  </form>
+</div>

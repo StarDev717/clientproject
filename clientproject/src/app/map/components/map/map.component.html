@@ -1,0 +1,55 @@
+<agm-map
+  [latitude]="lat"
+  [longitude]="lng"
+  [zoom]="zoom"
+  [disableDefaultUI]="false"
+  [zoomControl]="false"
+  (mapClick)="mapClicked($event)">
+  <agm-marker
+    *ngFor="let m of employees; let i = index"
+    (markerClick)="clickedMarker(m.firstName, i, 'employee')"
+    [latitude]="m.employeeLat"
+    [longitude]="m.employeeLong"
+    [label]="m.firstName | getInitials"
+    [iconUrl]="employeeIcon"
+    [markerDraggable]="m.draggable">
+
+    <agm-info-window
+      [isOpen]="isInfoWindowOpen(i, 'employee')">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-block text-center">
+            <h4 class="card-title">{{m.firstName}} {{m.lastName}}</h4>
+            <p class="category text-gray font-small-4">CEO / Co-Founder</p>
+            <hr class="grey">
+          </div>
+        </div>
+      </div>
+    </agm-info-window>
+
+  </agm-marker>
+
+  <agm-marker
+    *ngFor="let m of buildings; let i = index"
+    (markerClick)="clickedMarker(m.title, i, 'building')"
+    [latitude]="m.buildingLat"
+    [longitude]="m.buildingLong"
+    [label]="m.title | getInitials"
+    [iconUrl]="buildingIcon"
+    [markerDraggable]="m.draggable">
+
+    <agm-info-window
+      [isOpen]="isInfoWindowOpen(i, 'building')">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-block text-center">
+            <h4 class="card-title">{{m.title}}</h4>
+            <p class="category text-gray font-small-4">{{m.address}}</p>
+            <hr class="grey">
+          </div>
+        </div>
+      </div>
+    </agm-info-window>
+
+  </agm-marker>
+</agm-map>

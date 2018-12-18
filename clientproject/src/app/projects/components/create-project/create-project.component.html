@@ -1,0 +1,73 @@
+<section id="horizontal-form-layouts">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="content-header">Create Project</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="px-3">
+            <form class="form form-horizontal" [formGroup]="regularForm" (ngSubmit)="onReactiveFormSubmit()" novalidate>
+              <div class="form-body">
+                <h4 class="form-section"><i class="ft-file-text"></i> Project Info</h4>
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="title">Title: </label>
+                  <div class="col-md-9">
+                    <input type="text" id="title" formControlName="title" class="form-control"  name="title">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="description">Project Description: </label>
+                  <div class="col-md-9">
+                    <textarea id="description" rows="5" formControlName="description" class="form-control" name="description" ></textarea>
+                  </div>
+                </div>
+                <h4 class="form-section"><i class="fa fa-building"></i> Buildings</h4>
+                <div class="form-group row">
+                  <label class="col-md-3 label-control">Select Buildings: </label>
+                  <div class="col-md-9">
+                    <label id="buildings" class="file center-block">
+                      <input #buildings type="file" id="buildingsFile" (change)="upload(buildings.files, 'buildings')" />
+                      <span class="file-custom"></span>
+                      : </label>
+                    <span style="font-weight:bold;color:green;" *ngIf="progresses.buildings > 0 && progresses.buildings < 100">
+                      {{progresses.buildings}}%
+                    </span>
+                    <span style="font-weight:bold;color:green;" *ngIf="messages.buildings">
+                      {{messages.buildings}}
+                    </span>
+
+                  </div>
+                </div>
+                <h4 class="form-section"><i class="ft-user"></i> Employees</h4>
+                <div class="form-group row">
+                  <label class="col-md-3 label-control">Select Employees: </label>
+                  <div class="col-md-9">
+                    <label id="employees" class="file center-block">
+                      <input #employees type="file" id="employeesFile" (change)="upload(employees.files, 'employees')" />
+                      <span class="file-custom"></span>
+                      : </label>
+
+                    <span style="font-weight:bold;color:green;" *ngIf="progresses.employees > 0 && progresses.employees < 100">
+                      {{progresses.employees}}%
+                    </span>
+                    <span style="font-weight:bold;color:green;" *ngIf="messages.employees">
+                      {{messages.employees}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-raised btn-primary">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

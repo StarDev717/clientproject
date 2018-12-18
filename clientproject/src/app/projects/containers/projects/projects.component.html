@@ -1,0 +1,23 @@
+<!-- Filter Datatable Options Starts -->
+<section id="filter" class="mb-3">
+  <div class="row">
+    <div class="col-12">
+      <div class="content-header">Projects</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <ng2-smart-table [settings]="settings" [source]="data" (createConfirm)="onCustom($event)" (custom)="onCustom($event)">
+        <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+      </ng2-smart-table>
+    </div>
+        <div *ngIf="(projectsError$|async) || (projectsLoading$|async)" class="alert text-danger step col-sm-12 text-center">
+          <strong>{{projectsError$|async}}</strong>
+          <div class="text-center" *ngIf="projectsLoading$|async" >
+            <i class="spinner fa fa-refresh text-center" style="font-size:35px;"></i>
+          </div>
+        </div>
+
+  </div>
+</section>
+<!-- Filter Datatable Options Ends -->

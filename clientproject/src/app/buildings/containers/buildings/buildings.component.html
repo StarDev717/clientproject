@@ -1,0 +1,122 @@
+<!-- Filter Datatable Options Starts -->
+<section id="filter" class="mb-3">
+  <div class="row">
+    <div class="col-12">
+      <a (click)="updateEmployessList()"><i class="fa fa-refresh" style="font-size:24px"></i></a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="content-header">Employees</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <ng2-smart-table [settings]="settings" [source]="data" (createConfirm)="onCustom($event)"  (custom)="onCustom($event)">
+        <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+      </ng2-smart-table>
+    </div>
+  </div>
+</section>
+<!-- Filter Datatable Options Ends -->
+<div class="row">
+  <div class="col-12">
+    <div class="content-header">Projection Data</div>
+  </div>
+</div>
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <ngb-panel id="ngb-panel-0">
+    <ng-template ngbPanelTitle>
+      <span>&#9733; <b>Responsive 1</b> &#9733;</span> <span class="tooltip-caret"></span>
+    </ng-template>
+    <ng-template ngbPanelContent>
+      <!--section-->
+      <div class="col-md-4">
+        <div class="position-relative has-icon-left">
+          <input  [(ngModel)]="query" type="text" class="form-control" name="form-control-with-icon">
+          <div class="form-control-position">
+            <i class="ft-search info"></i>
+          </div>
+        </div>
+      </div>
+
+      <section id="buildings" >
+        <div class="row">
+          <div *ngFor="let employee of buildings$|async | search:'firstName,lastName':query"  class="col-12 col-md-6 col-lg-4 col-xl-4">
+            <div class="card">
+              <div class="card-header text-center">
+                <img src="./assets/img/portrait/small/avatar-s-3.png" alt="Brek" width="100" class="rounded-circle gradient-mint">
+              </div>
+              <div class="card-body">
+                <div class="card-block text-center">
+                  <h4 class="card-title">{{employee.firstName}} {{employee.lastName}}</h4>
+                  <p class="category text-gray font-small-4">{{employee.email}}</p>
+                  <a class="btn btn-sm gradient-mint font-small-2 white mr-2">View Map</a>
+                  <a class="btn btn-sm btn-outline-grey font-small-2 ">View Details</a>
+                  <hr class="grey">
+                  <div class="row grey">
+                    <div class="col-6">
+                      <a><i class="ft-map-pin mr-1"></i> <span>4.9 mi</span></a>
+                    </div>
+                    <div class="col-6">
+                      <a><i class="ft-clock mr-1"></i> <span>5 min</span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--section end-->
+
+    </ng-template>
+  </ngb-panel>
+  <ngb-panel id="ngb-panel-1">
+    <ng-template ngbPanelTitle>
+      <span>&#9733; <b>Responsive 2</b> &#9733;</span>
+    </ng-template>
+    <ng-template ngbPanelContent>
+      <!--section-->
+      <div class="col-md-4">
+        <div class="position-relative has-icon-left">
+          <input  [(ngModel)]="query1" type="text" class="form-control" name="form-control-with-icon">
+          <div class="form-control-position">
+            <i class="ft-search info"></i>
+          </div>
+        </div>
+      </div>
+
+      <section id="buildings" >
+        <div class="row">
+          <div *ngFor="let employee of data | search:'name,name':query1"  class="col-12 col-md-6 col-lg-4 col-xl-4">
+            <div class="card">
+              <div class="card-header text-center">
+                <img src="./assets/img/portrait/small/avatar-s-3.png" alt="Brek" width="100" class="rounded-circle gradient-mint">
+              </div>
+              <div class="card-body">
+                <div class="card-block text-center">
+                  <h4 class="card-title">{{employee.name}}</h4>
+                  <p class="category text-gray font-small-4">{{employee.email}}</p>
+                  <a class="btn btn-sm gradient-mint font-small-2 white mr-2">View Map</a>
+                  <a class="btn btn-sm btn-outline-grey font-small-2 ">View Details</a>
+                  <hr class="grey">
+                  <div class="row grey">
+                    <div class="col-6">
+                      <a><i class="ft-map-pin mr-1"></i> <span>4.9 mi</span></a>
+                    </div>
+                    <div class="col-6">
+                      <a><i class="ft-clock mr-1"></i> <span>5 min</span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--section end-->
+
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
